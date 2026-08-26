@@ -54,7 +54,7 @@
         </div>
         <div class="form-group">
           <label>사용 인원 (명)</label>
-          <input type="text" id="headCount" required placeholder="인원수 입력(3명 이상)">
+          <input type="number" id="headCount" min="2" max="20" value="1" required placeholder="인원수 입력">
         </div>
         <div class="form-group">
           <label>세미나실 선택</label>
@@ -86,8 +86,8 @@
           <select id="endTime" required></select>
         </div>
         <div class="form-group full-width">
-          <label>사용자 이름 및 학번 </label>
-          <input type="text" id="participants" placeholder="(예: L17001 김철수, L17002 이영희)">
+          <label>사용자 이름 및 학번 <span style="color: red;">*</span></label>
+          <input type="text" id="participants" required placeholder="(예: L17001 홍길동, L17002 김철수)">
         </div>
       </div>
       <button type="submit" class="btn-submit" id="submitBtn">예약 신청하기</button>
@@ -303,7 +303,7 @@
               if (cell) {
                 cell.className = 'booked-cell';
                 // 학번 대신 사용 인원수(명)와 대표자 이름 표시
-                const headCountDisplay = b.headCount ? `${b.headCount}` : '';
+                const headCountDisplay = b.headCount ? `${b.headCount}명` : '';
                 cell.innerHTML = `<strong>${b.name} (${headCountDisplay})</strong>`;
               }
             }
