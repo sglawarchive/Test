@@ -45,12 +45,16 @@
     <form id="bookingForm">
       <div class="form-grid">
         <div class="form-group">
-          <label>이름</label>
+          <label>신청자 이름</label>
           <input type="text" id="userName" required placeholder="홍길동">
         </div>
         <div class="form-group">
-          <label>학번</label>
+          <label>신청자 학번</label>
           <input type="text" id="studentId" required placeholder="L17000">
+        </div>
+        <div class="form-group">
+          <label>사용 인원 (명)</label>
+          <input type="number" id="headCount" min="2" max="20" value="1" required placeholder="인원수 입력">
         </div>
         <div class="form-group">
           <label>세미나실 선택</label>
@@ -80,6 +84,10 @@
         <div class="form-group">
           <label>종료 시간 (08:30 ~ 22:00)</label>
           <select id="endTime" required></select>
+        </div>
+        <div class="form-group full-width">
+          <label>사용자 이름 및 학번 </label>
+          <input type="text" id="participants" placeholder="(예: L17001 김철수, L17002 이영희)">
         </div>
       </div>
       <button type="submit" class="btn-submit" id="submitBtn">예약 신청하기</button>
@@ -129,7 +137,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkNqlQ-k7RxGTPkm11lLYzv_tsdFD3l6uzyUSoOvcBVRG8So-kABC2fs726n5O8nnN8A/exec";
+//    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkNqlQ-k7RxGTPkm11lLYzv_tsdFD3l6uzyUSoOvcBVRG8So-kABC2fs726n5O8nnN8A/exec";
 //    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKJAD2qUO8HGe9MGB-omPm6wz_0inSP19gESc0R_Tt10cCu_nZQLHog5lNang19aG_Lw/exec";    
 
     let bookings = [];
@@ -289,12 +297,14 @@
             const endM = timeToMinutes(b.endTime);
 
             // 30분 단위로 순회하면서 해당하는 셀을 찾아 채움
-            for (let m = startM; m < endM; m += 30) {
+          for (let m = startM; m < endM; m += 30) {
               const cellKey = timeToCellKey(minutesToTime(m));
               const cell = document.getElementById(`cell-${day}-${cellKey}`);
               if (cell) {
                 cell.className = 'booked-cell';
-                cell.innerHTML = `<strong>${b.name}</strong><br>(${b.studentId})`;
+                // 학번 대신 사용 인원수(명)와 대표자 이름 표시
+                const headCountDisplay = b.headCount ? `${b.headCount}명` : '';
+                cell.innerHTML = `<strong>${b.name} (${headCountDisplay})</strong>`;
               }
             }
           }
@@ -306,10 +316,12 @@
     document.getElementById('bookingForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      const name = document.getElementById('userName').value;
+     const name = document.getElementById('userName').value;
       const studentId = document.getElementById('studentId').value;
+      const headCount = document.getElementById('headCount').value;
+      const participants = document.getElementById('participants').value;
       const room = document.getElementById('roomSelect').value;
-      const dayValue = parseInt(document.getElementById('bookingDay').value, 10); // 1(월) ~ 5(금)
+      const dayValue = parseInt(document.getElementById('bookingDay').value, 10);
         
         // 선택한 요일에 해당하는 이번 주 실제 YYYY-MM-DD 날짜 구하기
         const today = new Date();
@@ -386,6 +398,8 @@
       const formData = new FormData();
       formData.append('name', name);
       formData.append('studentId', studentId);
+      formData.append('headCount', headCount);
+      formData.append('participants', participants);
       formData.append('room', room);
       formData.append('date', dateStr);
       formData.append('startTime', startTime);
