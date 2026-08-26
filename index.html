@@ -303,7 +303,7 @@
               if (cell) {
                 cell.className = 'booked-cell';
                 // 학번 대신 사용 인원수(명)와 대표자 이름 표시
-                const headCountDisplay = b.headCount ? `${b.headCount}명` : '';
+                const headCountDisplay = b.headCount ? `${b.headCount}` : '';
                 cell.innerHTML = `<strong>${b.name} (${headCountDisplay})</strong>`;
               }
             }
