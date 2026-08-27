@@ -6,131 +6,25 @@
   <title>세미나실 예약 시스템</title>
 
   <style>
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      max-width: 1000px;
-      margin: 20px auto;
-      padding: 0 15px;
-      color: #333;
-    }
-
-    h2, h3 {
-      color: #1a365d;
-      text-align: center;
-    }
-
-    .booking-card {
-      background: #f7fafc;
-      border: 1px solid #e2e8f0;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 30px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-group label {
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .form-group input,
-    .form-group select {
-      padding: 8px 12px;
-      border: 1px solid #cbd5e0;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    .full-width {
-      grid-column: 1 / -1;
-    }
-
-    .btn-submit {
-      width: 100%;
-      background-color: #2b6cb0;
-      color: white;
-      border: none;
-      padding: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .btn-submit:disabled {
-      background-color: #a0aec0;
-      cursor: not-allowed;
-    }
-
-    .filter-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-      gap: 15px;
-    }
-
-    .filter-container h3 {
-      margin: 0;
-    }
-
-    .timetable-wrapper {
-      overflow-x: auto;
-      border: 1px solid #cbd5e0;
-      border-radius: 6px;
-    }
-
-    .timetable {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
-      text-align: center;
-      background: white;
-    }
-
-    .timetable th,
-    .timetable td {
-      border: 1px solid #e2e8f0;
-      padding: 6px 4px;
-      font-size: 12px;
-    }
-
-    .timetable th {
-      background-color: #ebf8ff;
-      color: #2b6cb0;
-    }
-
-    .timetable td.time-col {
-      background-color: #f7fafc;
-      font-weight: bold;
-      width: 110px;
-    }
-
-    .booked-cell {
-      background-color: #ebf8ff;
-      border-left: 3px solid #3182ce !important;
-      color: #2c5282;
-      font-size: 11px;
-    }
-
-    .loading-overlay {
-      text-align: center;
-      color: #4a5568;
-      font-weight: bold;
-      margin: 10px 0;
-    }
+    body {font-family: 'Noto Sans KR', sans-serif; max-width: 1000px; margin: 20px auto; padding: 0 15px; color: #333;}
+    h2, h3 {color: #1a365d; text-align: center;}
+   .booking-card { background: #f7fafc;  border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; margin-bottom: 30px;}
+   .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;  margin-bottom: 15px;}
+   .form-group {display: flex; flex-direction: column;}
+   .form-group label {font-size: 14px; font-weight: bold; margin-bottom: 5px;}
+   .form-group input, .form-group select {padding: 8px 12px; border: 1px solid #cbd5e0; border-radius: 4px; box-sizing: border-box;}
+   .full-width {grid-column: 1 / -1;}
+   .btn-submit {width: 100%; background-color: #2b6cb0; color: white; border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer;}
+   .btn-submit:disabled {background-color: #a0aec0; cursor: not-allowed;}
+   .filter-container {display: flex; justify-content: space-between; align-items: center;  margin-bottom: 15px; gap: 15px;}
+   .filter-container h3 {  margin: 0; }
+   .timetable-wrapper { overflow-x: auto; border: 1px solid #cbd5e0; border-radius: 6px;}
+   .timetable {width: 100%; border-collapse: collapse; min-width: 700px; text-align: center; background: white;}
+   .timetable th, .timetable td {border: 1px solid #e2e8f0; padding: 6px 4px; font-size: 12px;}
+   .timetable th {background-color: #ebf8ff; color: #2b6cb0;}
+   .timetable td.time-col {background-color: #f7fafc; font-weight: bold; width: 110px;}
+   .booked-cell { background-color: #ebf8ff; border-left: 3px solid #3182ce !important; color: #2c5282; font-size: 11px;}
+   .loading-overlay {text-align: center; color: #4a5568; font-weight: bold; margin: 10px 0;}
 
     .notice-box {
       background-color: #fff8e6;
@@ -164,11 +58,7 @@
       align-items: center;
     }
 
-    .notice-box li,
-    .notice-box1 li {
-      font-size: 13px;
-      margin-bottom: 2px;
-    }
+    .notice-box li, .notice-box1 li {font-size: 13px; margin-bottom: 2px;}
 
     @media (max-width: 600px) {
       .filter-container {
@@ -188,41 +78,21 @@
   <h2>🏫 세미나실 예약 시스템</h2>
 
   <div class="booking-card">
-
     <form id="bookingForm">
-
       <div class="form-grid">
-
         <div class="form-group">
           <label>신청자 이름</label>
-          <input
-            type="text"
-            id="userName"
-            required
-            placeholder="홍길동"
-          >
+          <input type="text" id="userName" required placeholder="홍길동">
         </div>
 
         <div class="form-group">
           <label>신청자 학번</label>
-          <input
-            type="text"
-            id="studentId"
-            required
-            placeholder="L17000"
-          >
+          <input type="text" id="studentId" required placeholder="L17000">
         </div>
 
         <div class="form-group">
           <label>사용 인원 (명)</label>
-          <input
-            type="number"
-            id="headCount"
-            min="3"
-            max="20"
-            required
-            placeholder="인원수 입력"
-          >
+          <input type="number" id="headCount" min="3" max="20" required placeholder="인원수 입력">
         </div>
 
         <div class="form-group">
@@ -261,38 +131,21 @@
         </div>
 
         <div class="form-group full-width">
-          <label>
-            사용자 이름 및 학번
-            <span style="color: red;">*</span>
-          </label>
-
-          <input
-            type="text"
-            id="participants"
-            required
-            placeholder="(예: L17001 홍길동, L17002 김철수)"
-          >
+          <label> 사용자 이름 및 학번</label>
+          <input type="text" id="participants" required placeholder="(예: L17001 홍길동, L17002 김철수)">
         </div>
 
       </div>
 
-      <button
-        type="submit"
-        class="btn-submit"
-        id="submitBtn"
-      >
+      <button type="submit" class="btn-submit" id="submitBtn">
         예약 신청하기
       </button>
-
     </form>
-
   </div>
 
 
   <div class="notice-box">
-
     <h4>⚠️ 예약 안내사항</h4>
-
     <ul>
       <li>하루 최대 3시간까지만 사용 가능합니다.</li>
       <li>예약은 매주 월요일 0시에 초기화됩니다.</li>
@@ -302,40 +155,19 @@
         (* 10월 이후에는 행정팀(lawschool@sogang.ac.kr)으로 권한 이전 예정)
       </li>
     </ul>
-
-    <p style="font-size: 13px;">
-      ※ 교내 행사, 교수님 면담 등 행정업무 발생시 예약이 취소될 수 있습니다.
-    </p>
-
-    <p style="font-size: 13px;">
-      ※ 세미나실 이용 완료 후에는 다음 사람이 사용할 수 있도록 개인 짐을 모두 가져가주시기 바랍니다.
-    </p>
-
+    <p style="font-size: 13px;" margin-bottom: 15px;> ※ 교내 행사, 교수님 면담 등 행정업무 발생시 예약이 취소될 수 있습니다. </p>
+    <p style="font-size: 13px;"> ※ 세미나실 이용 완료 후에는 다음 사람이 사용할 수 있도록 개인 짐을 모두 가져가주시기 바랍니다. </p>
   </div>
 
 
   <div class="notice-box1">
-
     <h5>⚠️ 유의사항</h5>
-
     <ul>
-      <li>
-        스터디 목적 이외의 예약이 필요한 경우 행정팀(X223)에서 오프라인으로 시설물 사용을 신청하기 바랍니다.
-      </li>
-
-      <li>
-        사용인원 전원의 학번을 입력하여야 하며 다른 학생의 동의를 받지 않고 학번정보를 허위로 입력하는 경우 개인정보 도용에 해당하므로 유의하시기 바랍니다.
-      </li>
-
-      <li>
-        법학전문대학원 재학생 이외의 외부단체(외부인) 사용은 불가합니다.
-      </li>
+      <li>스터디 목적 이외의 예약이 필요한 경우 행정팀(X223)에서 오프라인으로 시설물 사용을 신청하기 바랍니다.</li>
+      <li>사용인원 전원의 학번을 입력하여야 하며 다른 학생의 동의를 받지 않고 학번정보를 허위로 입력하는 경우 개인정보 도용에 해당하므로 유의하시기 바랍니다.</li>
+      <li>법학전문대학원 재학생 이외의 외부단체(외부인) 사용은 불가합니다.</li>
     </ul>
-
-    <p style="font-size: 13px;">
-      ※ 온라인 예약시스템은 2026년 2학기 시범운영 중입니다.
-    </p>
-
+    <p style="font-size: 13px;"> ※ 온라인 예약시스템은 2026년 2학기 시범운영 중입니다. </p>
   </div>
 
 
@@ -344,17 +176,11 @@
     <h3>📅 주간 실시간 예약 현황</h3>
 
     <div>
-      <label
-        for="viewRoomSelect"
-        style="font-weight: bold;"
-      >
+      <label for="viewRoomSelect" style="font-weight: bold;">
         조회할 세미나실:
       </label>
 
-      <select
-        id="viewRoomSelect"
-        style="padding: 5px 10px;"
-      >
+      <select id="viewRoomSelect" style="padding: 5px 10px;">
         <option value="X234">X234</option>
         <option value="X236">X236</option>
         <option value="X334">X334</option>
@@ -363,7 +189,6 @@
     </div>
 
   </div>
-
 
   <div
     id="loadingStatus"
@@ -375,11 +200,8 @@
 
 
   <div class="timetable-wrapper">
-
     <table class="timetable">
-
       <thead>
-
         <tr>
           <th>시간</th>
           <th id="th-mon">월요일</th>
@@ -388,73 +210,41 @@
           <th id="th-thu">목요일</th>
           <th id="th-fri">금요일</th>
         </tr>
-
       </thead>
-
       <tbody id="timetableBody"></tbody>
-
     </table>
-
   </div>
 
 
   <script>
-
-    // =========================================================
-    // Google Apps Script URL
-    // =========================================================
-
-    const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbwdw1vMdw4II0adXXpIuF2O1pt_hnDs7pcCUfw3lQLzfMVwR1IRJUGNco_ZjPYvuShIHw/exec";
-
-
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdw1vMdw4II0adXXpIuF2O1pt_hnDs7pcCUfw3lQLzfMVwR1IRJUGNco_ZjPYvuShIHw/exec";
     let bookings = [];
 
-
-    // =========================================================
     // 시간 변환 함수
-    // =========================================================
-
     function timeToMinutes(timeStr) {
-
       if (!timeStr) return 0;
-
       const parts = String(timeStr).split(':');
-
       const h = parseInt(parts[0], 10) || 0;
       const m = parseInt(parts[1], 10) || 0;
-
       return h * 60 + m;
     }
-
-
     function minutesToTime(minutes) {
-
       const h = Math.floor(minutes / 60);
       const m = minutes % 60;
-
       return (
-        String(h).padStart(2, '0') +
-        ':' +
-        String(m).padStart(2, '0')
+        String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0')
       );
     }
 
-
     function timeToCellKey(timeStr) {
-
       const parts = String(timeStr).split(':');
-
       const h = parseInt(parts[0], 10);
       const m = parseInt(parts[1], 10);
-
       return `${h}-${m}`;
     }
 
 
-    // =========================================================
     // 시작 / 종료 시간 옵션 생성
-    // =========================================================
 
     const startTimeSelect =
       document.getElementById('startTime');
@@ -462,9 +252,7 @@
     const endTimeSelect =
       document.getElementById('endTime');
 
-
     // 시작 시간 08:00 ~ 21:30
-
     for (
       let m = 8 * 60;
       m <= 21 * 60 + 30;
@@ -477,9 +265,7 @@
         `<option value="${timeVal}">${timeVal}</option>`;
     }
 
-
     // 종료 시간 08:30 ~ 22:00
-
     for (
       let m = 8 * 60 + 30;
       m <= 22 * 60;
@@ -493,29 +279,19 @@
     }
 
 
-    // =========================================================
     // 이번 주 날짜 표시
-    // =========================================================
 
     function updateTableHeaders() {
-
       const today = new Date();
-
       const dayOfWeek = today.getDay();
-
       const distanceToMon =
         dayOfWeek === 0
           ? -6
           : 1 - dayOfWeek;
-
-
       const monday = new Date(today);
-
       monday.setDate(
         today.getDate() + distanceToMon
       );
-
-
       const days = [
         'mon',
         'tue',
@@ -523,7 +299,6 @@
         'thu',
         'fri'
       ];
-
       const dayNames = [
         '월',
         '화',
@@ -531,94 +306,51 @@
         '목',
         '금'
       ];
-
-
       days.forEach((day, index) => {
-
-        const targetDate =
-          new Date(monday);
-
+        const targetDate = new Date(monday);
         targetDate.setDate(
           monday.getDate() + index
         );
-
-
-        const month =
-          targetDate.getMonth() + 1;
-
-        const date =
-          targetDate.getDate();
-
-
-        const thElement =
-          document.getElementById(`th-${day}`);
-
-
+        const month = targetDate.getMonth() + 1;
+        const date = targetDate.getDate();
+        const thElement = document.getElementById(`th-${day}`);
         if (thElement) {
-
           thElement.innerText =
             `${dayNames[index]}요일 (${month}/${date})`;
         }
-
       });
 
     }
-
-
-    // =========================================================
+   
     // 시간표 생성
-    // =========================================================
 
     function initTimetable() {
-
-      const timetableBody =
-        document.getElementById('timetableBody');
-
+      const timetableBody = document.getElementById('timetableBody');
       timetableBody.innerHTML = '';
-
 
       for (
         let m = 8 * 60;
         m < 22 * 60;
         m += 30
       ) {
-
-        const startStr =
-          minutesToTime(m);
-
-        const endStr =
-          minutesToTime(m + 30);
-
-        const cellKey =
-          timeToCellKey(startStr);
-
-        const timeLabel =
-          `${startStr} - ${endStr}`;
-
-
+        const startStr = minutesToTime(m);
+        const endStr = minutesToTime(m + 30);
+        const cellKey = timeToCellKey(startStr);
+        const timeLabel = `${startStr} - ${endStr}`;
         let rowHtml =
           `<tr>
             <td class="time-col">${timeLabel}</td>`;
 
-
         for (let day = 1; day <= 5; day++) {
-
           rowHtml +=
             `<td id="cell-${day}-${cellKey}"></td>`;
         }
-
-
         rowHtml += '</tr>';
-
         timetableBody.innerHTML += rowHtml;
       }
-
     }
 
-
-    // =========================================================
     // 날짜 파싱
-    // =========================================================
 
     function parseDate(dateStr) {
 
@@ -630,31 +362,17 @@
           .trim()
           .split(/\s+/);
 
-
       if (nums.length >= 3) {
 
-        const y =
-          parseInt(nums[0], 10);
-
-        const m =
-          parseInt(nums[1], 10) - 1;
-
-        const d =
-          parseInt(nums[2], 10);
-
-
+        const y = parseInt(nums[0], 10);       
+        const m = parseInt(nums[1], 10) - 1;   
+        const d = parseInt(nums[2], 10);   
         return new Date(y, m, d);
       }
-
-
       return null;
     }
 
-
-    // =========================================================
     // 세미나실 이름 정리
-    // =========================================================
-
     function cleanRoomName(roomStr) {
 
       return String(roomStr || '')
@@ -689,35 +407,21 @@
       // 이전 callback 제거
 
       window.handleGoogleSheetData = function(data) {
-
         try {
-
           if (Array.isArray(data)) {
-
             bookings = data;
-
           } else {
-
             bookings = [];
           }
-
-
           renderTimetable();
-
-
           loadingStatus.style.display = 'none';
-
-
         } catch (error) {
-
           console.error(
             '예약 데이터 처리 오류:',
             error
           );
-
           loadingStatus.innerText =
             '⚠️ 예약 정보를 처리하는 중 오류가 발생했습니다.';
-
         }
 
 
@@ -727,7 +431,6 @@
         if (oldScript) {
           oldScript.remove();
         }
-
       };
 
 
@@ -739,68 +442,42 @@
       if (oldScript) {
         oldScript.remove();
       }
-
-
       const script =
         document.createElement('script');
-
-
       script.id = 'jsonpScript';
+      script.src = SCRIPT_URL + '?callback=handleGoogleSheetData' + '&t=' + Date.now();
 
 
-      script.src =
-        SCRIPT_URL +
-        '?callback=handleGoogleSheetData' +
-        '&t=' + Date.now();
-
-
-      // =====================================================
       // 네트워크 오류 발생 시 자동 재시도
-      // =====================================================
 
       script.onerror = function() {
-
         console.error(
           'Google Sheet 데이터 로딩 실패'
         );
-
-
         const oldScript =
           document.getElementById('jsonpScript');
 
         if (oldScript) {
           oldScript.remove();
         }
-
-
         if (retryCount < 2) {
-
           setTimeout(function() {
-
             fetchBookings(
               retryCount + 1
             );
-
           }, 1000);
-
         } else {
-
           loadingStatus.style.display = 'block';
-
           loadingStatus.innerText =
             '⚠️ 예약 정보를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.';
         }
-
       };
 
 
       document.body.appendChild(script);
     }
 
-
-    // =========================================================
     // 시간표 렌더링
-    // =========================================================
 
     function renderTimetable() {
 
@@ -891,10 +568,7 @@
 
     }
 
-
-    // =========================================================
     // 예약 신청
-    // =========================================================
 
     document
       .getElementById('bookingForm')
